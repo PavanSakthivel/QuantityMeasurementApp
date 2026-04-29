@@ -75,11 +75,11 @@ public class QuantityMeasurementAppTest {
         Length b = new Length(12.0, LengthUnit.INCHES);
         Length c = new Length(30.48, LengthUnit.CM);
 
-        assertEquals(a, a);       // reflexive
-        assertEquals(a, b);       // symmetric
-        assertEquals(b, a);
-        assertEquals(b, c);       // transitive
-        assertEquals(a, c);
+        assertEquals(a, a); // reflexive
+        assertEquals(a, b);
+        assertEquals(b, a); // symmetric
+        assertEquals(b, c);
+        assertEquals(a, c); // transitive
     }
 
     @Test
@@ -120,16 +120,30 @@ public class QuantityMeasurementAppTest {
         assertTrue(QuantityMeasurementApp.demonstrateLengthEquality(result, expected));
     }
 
-    // 🔥 NEW: Addition Test
+    // -------- ADDITION TESTS --------
+
     @Test
     public void addFeetAndInches() {
-        Length length1 = new Length(1.0, LengthUnit.FEET);
-        Length length2 = new Length(12.0, LengthUnit.INCHES);
+        Length l1 = new Length(1.0, LengthUnit.FEET);
+        Length l2 = new Length(12.0, LengthUnit.INCHES);
 
-        Length sum = QuantityMeasurementApp.demonstrateLengthAddition(length1, length2);
+        Length result = QuantityMeasurementApp.demonstrateLengthAddition(l1, l2);
 
         Length expected = new Length(2.0, LengthUnit.FEET);
 
-        assertTrue(QuantityMeasurementApp.demonstrateLengthEquality(sum, expected));
+        assertTrue(QuantityMeasurementApp.demonstrateLengthEquality(result, expected));
+    }
+
+    @Test
+    public void addFeetAndInchesWithTargetUnitInches() {
+        Length l1 = new Length(1.0, LengthUnit.FEET);
+        Length l2 = new Length(12.0, LengthUnit.INCHES);
+
+        Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                l1, l2, LengthUnit.INCHES);
+
+        Length expected = new Length(24.0, LengthUnit.INCHES);
+
+        assertTrue(QuantityMeasurementApp.demonstrateLengthEquality(result, expected));
     }
 }
